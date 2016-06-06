@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RetrofitExample</string>
+    <string name="label_add_user">Add User</string>
+</resources>
