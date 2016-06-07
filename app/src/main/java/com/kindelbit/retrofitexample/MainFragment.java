@@ -13,12 +13,16 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.kindelbit.retrofitexample.adapters.UsersAdapter;
-import com.kindelbit.retrofitexample.interfaces.UsersService;
+import com.kindelbit.retrofitexample.datasource.UsersDatasource;
+import com.kindelbit.retrofitexample.services.RetrofitBuilder;
+import com.kindelbit.retrofitexample.services.UsersService;
 import com.kindelbit.retrofitexample.models.User;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,6 +37,8 @@ public class MainFragment extends Fragment {
     private UsersAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private UsersAdapter.OnItemClickListener mListener;
+    private Realm mRealm;
+    private UsersDatasource mUserDatasource;
 
     @Override
     public void onAttach(Context context) {
@@ -52,20 +58,27 @@ public class MainFragment extends Fragment {
         mAdapter = new UsersAdapter(new ArrayList<User>(), mListener);
         mRecyclerViewUsers.setAdapter(mAdapter);
 
+        mRealm = Realm.getDefaultInstance();
+        mUserDatasource = new UsersDatasource(mRealm);
         getUsers();
 
         return view;
     }
 
-    private void getUsers() {
+    private void getUsersFromTheWeb() {
         Retrofit retrofit = RetrofitBuilder.getInstance();
         UsersService usersService = retrofit.create(UsersService.class);
         Call<List<User>> call = usersService.getUsers();
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                mAdapter.swap(response.body());
-                Log.d("MainFragment", "USERS Returned: " + response.body().size());
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    mUserDatasource.replaceAll(response.body());
+                    getUsers();
+                    Log.d("MainFragment", "USERS Returned: " + response.body().size());
+                } else {
+                    Toast.makeText(getActivity(), "Failed to get data...", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -76,6 +89,10 @@ public class MainFragment extends Fragment {
     }
 
     public void refreshList() {
-        getUsers();
+        getUsersFromTheWeb();
+    }
+
+    public void getUsers() {
+        mAdapter.swap(mUserDatasource.getUsers());
     }
 }

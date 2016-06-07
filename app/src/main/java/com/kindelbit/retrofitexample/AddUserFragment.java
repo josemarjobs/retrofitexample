@@ -1,5 +1,6 @@
 package com.kindelbit.retrofitexample;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.kindelbit.retrofitexample.interfaces.UsersService;
 import com.kindelbit.retrofitexample.models.User;
+import com.kindelbit.retrofitexample.services.RetrofitBuilder;
+import com.kindelbit.retrofitexample.services.UsersService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,13 +42,17 @@ public class AddUserFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-
     @Override
     public void onClick(View v) {
         User user = new User();
         user.setName(etName.getText().toString());
         user.setEmail(etEmail.getText().toString());
         user.setRegistratinId(etRegistrationId.getText().toString());
+
+        saveUser(user);
+    }
+
+    private void saveUser(User user) {
         Retrofit retrofit = RetrofitBuilder.getInstance();
         UsersService service = retrofit.create(UsersService.class);
         Call<User> call = service.createUser(user);
@@ -54,6 +60,7 @@ public class AddUserFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Toast.makeText(getContext(), response.body().toString() + "\nSaved", Toast.LENGTH_SHORT).show();
+                getActivity().setResult(Activity.RESULT_OK);
                 getActivity().finish();
             }
 

@@ -1,6 +1,6 @@
-package com.kindelbit.retrofitexample;
+package com.kindelbit.retrofitexample.services;
 
-import com.kindelbit.retrofitexample.interfaces.Constants;
+import com.kindelbit.retrofitexample.services.Constants;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

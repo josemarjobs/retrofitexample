@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.OnIt
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final String USER_EXTRA = "user_extra";
+    private static final int REQUEST_ADD_USER = 3001;
     private MainFragment fragment;
 
     @Override
@@ -32,12 +33,27 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.OnIt
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_add_user) {
             Intent intent = new Intent(this, AddUserActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_ADD_USER);
         } else if (item.getItemId() == R.id.menu_refresh_list) {
-            fragment.refreshList();
+            refreshFragment();
         }
 
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ADD_USER){
+            if (resultCode == RESULT_OK){
+                refreshFragment();
+            }
+        }
+    }
+
+    private void refreshFragment() {
+        fragment.refreshList();
+        fragment.getUsers();
     }
 
     @Override

@@ -4,12 +4,16 @@ import android.os.Bundle;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by josemarmagalhaes on 6/5/16.
  */
-public class User {
+public class User extends RealmObject{
 
     @SerializedName("_id")
+    @PrimaryKey
     private String id;
     private String name;
     private String email;

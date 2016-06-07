@@ -1,4 +1,4 @@
-package com.kindelbit.retrofitexample.interfaces;
+package com.kindelbit.retrofitexample.services;
 
 /**
  * Created by josemarmagalhaes on 6/5/16.

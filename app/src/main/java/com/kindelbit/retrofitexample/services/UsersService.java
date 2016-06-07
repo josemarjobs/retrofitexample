@@ -1,4 +1,4 @@
-package com.kindelbit.retrofitexample.interfaces;
+package com.kindelbit.retrofitexample.services;
 
 import com.kindelbit.retrofitexample.models.User;
 
