@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.kindelbit.retrofitexample.adapters.OnItemClickListener;
 import com.kindelbit.retrofitexample.adapters.UsersAdapter;
 import com.kindelbit.retrofitexample.datasource.UsersDatasource;
 import com.kindelbit.retrofitexample.services.RetrofitBuilder;
@@ -36,14 +37,17 @@ public class MainFragment extends Fragment {
     private RecyclerView mRecyclerViewUsers;
     private UsersAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-    private UsersAdapter.OnItemClickListener mListener;
+    private OnItemClickListener mListener;
     private Realm mRealm;
     private UsersDatasource mUserDatasource;
+
+    public MainFragment() {
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mListener = (UsersAdapter.OnItemClickListener) getActivity();
+        mListener = (OnItemClickListener) getActivity();
     }
 
     @Nullable

@@ -25,6 +25,15 @@
             android:name=".UserDetailsActivity"
             android:label="User Details"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ViewImagesActivity"
+            android:label="Images"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ImageViewerActivity"
+            android:label="Image"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:parentActivityName=".ViewImagesActivity" />
     </application>
 
 </manifest>

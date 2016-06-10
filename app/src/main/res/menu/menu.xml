@@ -2,13 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <item
-        android:title="Add User"
         android:id="@+id/menu_add_user"
-        tools:showAsAction="always"
         android:orderInCategory="100"
-        />
-    <item android:title="Refresh List"
-        tools:showAsAction="never"
+        android:title="Add User"
+        tools:showAsAction="always" />
+    <item
+        android:id="@+id/menu_view_images"
         android:orderInCategory="101"
-        android:id="@+id/menu_refresh_list"/>
+        android:title="View Images"
+        tools:showAsAction="never" />
+    <item
+        android:id="@+id/menu_refresh_list"
+        android:orderInCategory="102"
+        android:title="Refresh List"
+        tools:showAsAction="never" />
 </menu>

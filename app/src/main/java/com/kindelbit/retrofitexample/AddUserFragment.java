@@ -30,6 +30,9 @@ public class AddUserFragment extends Fragment implements View.OnClickListener {
     private EditText etRegistrationId;
     private Button buttonSave;
 
+    public AddUserFragment() {
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

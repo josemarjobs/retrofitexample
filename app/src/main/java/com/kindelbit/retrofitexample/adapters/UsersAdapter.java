@@ -61,7 +61,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             tvRegistrationId = (TextView) itemView.findViewById(R.id.tvRegistrationId);
         }
 
-        void bind(final User item, final OnItemClickListener listener) {
+        void bind(final User item, final OnItemClickListener<User> listener) {
             tvEmail.setText(item.getEmail());
             tvId.setText(item.getId());
             tvName.setText(item.getName());
@@ -75,7 +75,4 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         }
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(User item);
-    }
 }

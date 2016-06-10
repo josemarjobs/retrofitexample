@@ -14,8 +14,8 @@
             android:layout_height="350dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@android:color/darker_gray"
-            android:src="@mipmap/ic_launcher" />
+            android:scaleType="center"
+            android:src="@drawable/_placeholder" />
 
 
 

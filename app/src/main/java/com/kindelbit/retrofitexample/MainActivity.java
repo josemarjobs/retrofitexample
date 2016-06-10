@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.kindelbit.retrofitexample.adapters.UsersAdapter;
+import com.kindelbit.retrofitexample.adapters.OnItemClickListener;
 import com.kindelbit.retrofitexample.models.User;
 
-public class MainActivity extends AppCompatActivity implements UsersAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener<User> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final String USER_EXTRA = "user_extra";
@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.OnIt
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_add_user) {
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.OnIt
             startActivityForResult(intent, REQUEST_ADD_USER);
         } else if (item.getItemId() == R.id.menu_refresh_list) {
             refreshFragment();
+        } else if (item.getItemId() == R.id.menu_view_images) {
+            Intent intent = new Intent(this, ViewImagesActivity.class);
+            startActivity(intent);
         }
 
         return true;
@@ -44,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.OnIt
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ADD_USER){
-            if (resultCode == RESULT_OK){
+        if (requestCode == REQUEST_ADD_USER) {
+            if (resultCode == RESULT_OK) {
                 refreshFragment();
             }
         }
